@@ -26,11 +26,15 @@ def game():
 
     while tries > 0 and not correct_answer:
         print(f"Number of tries: {tries}")
-        answer = int(input("Guess the number: "))
+        # Error handling incase input isn't a number
+        try:
+            answer = int(input("Guess the number: "))
+        except(ValueError):
+            answer = int(input("Please enter a number: "))
 
+        # If statement to compare player answer with the generated number
         if answer == rand_number:
             correct_answer = True
-            print(f"Congratulations! The correct number is {rand_number}")
         elif answer > rand_number:
             print("Too High!\n")
         elif answer < rand_number:
@@ -38,13 +42,21 @@ def game():
 
         # Subtracting the number of trials left with each wrong answer
         tries -= 1
-        if tries == 0:
-            print(f"Game over, you have 0 trials left! \nThe correct number was: {rand_number}")
 
-            # Asking the player if they want to play again otherwise game ends
-            continuation = input("Would you like to play again? (y/n):").lower()
-            if continuation == 'y':
-                game()
+    if tries == 0 or correct_answer:
+        result(tries, rand_number)
 
+
+# Display result when player has ran out of turns or gotten the correct answer
+def result(attempts, correct_number):
+    if attempts == 0:
+        print(f"Game over, you have 0 trials left! \nThe correct number was: {correct_number}")
+    else:
+        print(f"Congratulations! The correct number is {correct_number}")
+    
+    # Asking the player if they want to play again otherwise game ends
+    continuation = input("Would you like to play again? (y/n):").lower()
+    if continuation == 'y':
+        game()
 
 game()
