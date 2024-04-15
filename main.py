@@ -29,7 +29,7 @@ def game():
         # Error handling incase input isn't a number
         try:
             answer = int(input("Guess the number: "))
-        except(ValueError):
+        except ValueError:
             answer = int(input("Please enter a number: "))
 
         # If statement to compare player answer with the generated number
@@ -47,7 +47,7 @@ def game():
         result(tries, rand_number)
 
 
-# Display result when player has ran out of turns or gotten the correct answer
+# Display result when player runs out of turns or gotten the correct answer
 def result(attempts, correct_number):
     if attempts == 0:
         print(f"Game over, you have 0 trials left! \nThe correct number was: {correct_number}")
@@ -58,5 +58,6 @@ def result(attempts, correct_number):
     continuation = input("Would you like to play again? (y/n):").lower()
     if continuation == 'y':
         game()
+
 
 game()
